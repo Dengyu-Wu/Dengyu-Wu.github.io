@@ -1,1 +1,1 @@
-Sitemap: https://intranet.csc.liv.ac.uk/~dengyu/sitemap.xml
+Sitemap: https://dengyu-wu.github.io//sitemap.xml

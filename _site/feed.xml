@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://intranet.csc.liv.ac.uk/~dengyu/feed.xml" rel="self" type="application/atom+xml" /><link href="https://intranet.csc.liv.ac.uk/~dengyu/" rel="alternate" type="text/html" /><updated>2023-05-18T15:16:29+01:00</updated><id>https://intranet.csc.liv.ac.uk/~dengyu/feed.xml</id><title type="html">Dengyu Wu</title><subtitle>Dengyu Wu - PhD student at UoL</subtitle><author><name>Dengyu Wu</name></author><entry><title type="html">Blog Why Spiking Neural Networks</title><link href="https://intranet.csc.liv.ac.uk/~dengyu/blog-Why-Spiking-Neural-Networks/" rel="alternate" type="text/html" title="Blog Why Spiking Neural Networks" /><published>2020-12-29T00:00:00+00:00</published><updated>2020-12-29T00:00:00+00:00</updated><id>https://intranet.csc.liv.ac.uk/~dengyu/blog-Why-Spiking-Neural-Networks</id><content type="html" xml:base="https://intranet.csc.liv.ac.uk/~dengyu/blog-Why-Spiking-Neural-Networks/">&lt;!---
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator><link href="https://dengyu-wu.github.io//feed.xml" rel="self" type="application/atom+xml" /><link href="https://dengyu-wu.github.io//" rel="alternate" type="text/html" /><updated>2024-01-18T17:41:15+00:00</updated><id>https://dengyu-wu.github.io//feed.xml</id><title type="html">Dengyu Wu</title><subtitle>Dengyu Wu - PhD student at UoL</subtitle><author><name>Dengyu Wu</name></author><entry><title type="html">Blog Why Spiking Neural Networks</title><link href="https://dengyu-wu.github.io//blog-Why-Spiking-Neural-Networks/" rel="alternate" type="text/html" title="Blog Why Spiking Neural Networks" /><published>2020-12-29T00:00:00+00:00</published><updated>2020-12-29T00:00:00+00:00</updated><id>https://dengyu-wu.github.io//blog-Why-Spiking-Neural-Networks</id><content type="html" xml:base="https://dengyu-wu.github.io//blog-Why-Spiking-Neural-Networks/">&lt;!---
 ---
-title: 'Why Spiking Neural Networks (SNNs)?'
+title: &apos;Why Spiking Neural Networks (SNNs)?&apos;
 date: 2020-12-29
 permalink: /posts/2020/12/Why-Spiking-Neural-Networks/
 tags:
@@ -9,7 +9,7 @@ tags:
   - Neuromprphics
   - AI
 ---
-&lt;p style=&quot;font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5em;&quot;&gt;&quot;Look deep into nature, and then you will understand everything better&quot;  --- Albert Einstein&lt;/p&gt;
+&lt;p style=&quot;font-family: &apos;Playfair Display&apos;, serif; font-style: italic; font-size: 1.5em;&quot;&gt;&quot;Look deep into nature, and then you will understand everything better&quot;  --- Albert Einstein&lt;/p&gt;
 
 Overview
 ---
@@ -19,7 +19,7 @@ div.par_20 {
 }
 &lt;/style&gt;
 
-&lt;img src=&quot;/~dengyu/post_images/post-2/img_0.png&quot; alt=&quot;intro_1&quot; width='100%'/&gt;
+&lt;img src=&quot;/~dengyu/post_images/post-2/img_0.png&quot; alt=&quot;intro_1&quot; width=&apos;100%&apos;/&gt;
 &lt;div class=&quot;par_20&quot;&gt;    
 &lt;p&gt;Spiking neural network (SNN), the third-generation neural network, imitates the behaviour of biogical neural network to prcoess and forward information. SNN research involves neuroscience, microelectronic systems and computer science to undersand human brain and replicate its processing. Although AlphaGo [1] as the first computer program defeated a professional human Go player, it contains thousands of CPUs and hundreds of GPUs to maintain its functions, taking more than 1,000,000W of electricity, while the human brain integrated with hundreds of billions of neurons only needs 20W of power [2]. Combined with neuromorphic hardware, such as TrueNorth [3], Loihi [4] and Tianji [5], spiking-based computing systems can signifantly reduce power consumption of recognition tasks by using less operations and energy-efficient synatic operation [6].&lt;/p&gt;&lt;/div&gt;
 
