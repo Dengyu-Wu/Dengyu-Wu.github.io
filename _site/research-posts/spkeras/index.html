@@ -1,0 +1,476 @@
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+
+<meta charset="utf-8">
+
+
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>SpKeras: CNN-to-SNN Conversion Toolbox - Dengyu Wu</title>
+
+
+
+
+
+
+
+<meta property="og:locale" content="en-US">
+<meta property="og:site_name" content="Dengyu Wu">
+<meta property="og:title" content="SpKeras: CNN-to-SNN Conversion Toolbox">
+
+
+  <link rel="canonical" href="https://intranet.csc.liv.ac.uk/~dengyu/research-posts/spkeras/">
+  <meta property="og:url" content="https://intranet.csc.liv.ac.uk/~dengyu/research-posts/spkeras/">
+
+
+
+
+
+
+
+  
+
+  
+
+
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2021-03-01T00:00:00+00:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Person",
+      "name" : "Dengyu Wu",
+      "url" : "https://intranet.csc.liv.ac.uk/~dengyu",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+  <meta name="google-site-verification" content="X4fqSvO1EfoSpqrsyXA2pd4OVZX53IIKP_PvU4NP4qM" />
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://intranet.csc.liv.ac.uk/~dengyu/feed.xml" type="application/atom+xml" rel="alternate" title="Dengyu Wu Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="https://intranet.csc.liv.ac.uk/~dengyu/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+    
+<!-- start custom head snippets -->
+<link rel="apple-touch-icon" sizes="57x57" href="https://intranet.csc.liv.ac.uk/~dengyu/images/apple-touch-icon-57x57.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="60x60" href="https://intranet.csc.liv.ac.uk/~dengyu/images/apple-touch-icon-60x60.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="72x72" href="https://intranet.csc.liv.ac.uk/~dengyu/images/apple-touch-icon-72x72.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="76x76" href="https://intranet.csc.liv.ac.uk/~dengyu/images/apple-touch-icon-76x76.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="114x114" href="https://intranet.csc.liv.ac.uk/~dengyu/images/apple-touch-icon-114x114.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="120x120" href="https://intranet.csc.liv.ac.uk/~dengyu/images/apple-touch-icon-120x120.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="144x144" href="https://intranet.csc.liv.ac.uk/~dengyu/images/apple-touch-icon-144x144.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="152x152" href="https://intranet.csc.liv.ac.uk/~dengyu/images/apple-touch-icon-152x152.png?v=M44lzPylqQ">
+<link rel="apple-touch-icon" sizes="180x180" href="https://intranet.csc.liv.ac.uk/~dengyu/images/apple-touch-icon-180x180.png?v=M44lzPylqQ">
+<link rel="icon" type="image/png" href="https://intranet.csc.liv.ac.uk/~dengyu/images/favicon-32x32.png?v=M44lzPylqQ" sizes="32x32">
+<link rel="icon" type="image/png" href="https://intranet.csc.liv.ac.uk/~dengyu/images/android-chrome-192x192.png?v=M44lzPylqQ" sizes="192x192">
+<link rel="icon" type="image/png" href="https://intranet.csc.liv.ac.uk/~dengyu/images/favicon-96x96.png?v=M44lzPylqQ" sizes="96x96">
+<link rel="icon" type="image/png" href="https://intranet.csc.liv.ac.uk/~dengyu/images/favicon-16x16.png?v=M44lzPylqQ" sizes="16x16">
+<link rel="manifest" href="https://intranet.csc.liv.ac.uk/~dengyu/images/manifest.json?v=M44lzPylqQ">
+<link rel="mask-icon" href="https://intranet.csc.liv.ac.uk/~dengyu/images/safari-pinned-tab.svg?v=M44lzPylqQ" color="#000000">
+<link rel="shortcut icon" href="/images/favicon.ico?v=M44lzPylqQ">
+<meta name="msapplication-TileColor" content="#000000">
+<meta name="msapplication-TileImage" content="https://intranet.csc.liv.ac.uk/~dengyu/images/mstile-144x144.png?v=M44lzPylqQ">
+<meta name="msapplication-config" content="https://intranet.csc.liv.ac.uk/~dengyu/images/browserconfig.xml?v=M44lzPylqQ">
+<meta name="theme-color" content="#ffffff">
+<link rel="stylesheet" href="https://intranet.csc.liv.ac.uk/~dengyu/assets/css/academicons.css"/>
+
+<script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body>
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    
+
+<div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <button><div class="navicon"></div></button>
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg"><a href="https://intranet.csc.liv.ac.uk/~dengyu/">Dengyu Wu</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://intranet.csc.liv.ac.uk/~dengyu/research/">Research</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://intranet.csc.liv.ac.uk/~dengyu/publications/">Publications</a></li>
+          
+        </ul>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+
+
+
+
+
+<div id="main" role="main">
+  
+
+
+  <div class="sidebar sticky">
+  
+
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  <div class="author__avatar">
+    
+    	<img src="https://intranet.csc.liv.ac.uk/~dengyu/images/profile.jpeg" class="author__avatar" alt="Dengyu Wu">
+    
+  </div>
+
+  <div class="author__content">
+    <h3 class="author__name">Dengyu Wu</h3>
+    <p class="author__bio">A PhD Candidate at UoL exploring hardware and algorithm co-design for AI systems</p>
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> Liverpool, UK</li>
+      
+      
+        <li><i class="fa fa-fw fa-map-marker" aria-hidden="true"></i> University of Liverpool</li>
+      
+      
+      
+      
+       
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://github.com/Dengyu-Wu"><i class="fab fa-fw fa-github" aria-hidden="true"></i> Github</a></li>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+        <li><a href="https://scholar.google.com/citations?user=-Ji_VmkAAAAJ&hl=en&oi=sra"><i class="fas fa-fw fa-graduation-cap"></i> Google Scholar</a></li>
+      
+      
+      
+      
+      
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="SpKeras: CNN-to-SNN Conversion Toolbox">
+    
+    <meta itemprop="datePublished" content="March 01, 2021">
+    
+
+    <div class="page__inner-wrap">
+      
+        <header>
+          <h1 class="page__title" itemprop="headline">SpKeras: CNN-to-SNN Conversion Toolbox
+</h1>
+          
+        
+        
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Published:</strong> <time datetime="2021-03-01T00:00:00+00:00">March 01, 2021</time></p>
+        
+        
+             
+        
+    
+        </header>
+      
+
+      <section class="page__content" itemprop="text">
+        <!-- ABOUT THE PROJECT -->
+<h2 id="convert-cnn-to-snn-within-one-line-code">Convert CNN to SNN within one-line code</h2>
+<p><img src="/~dengyu/post_images/spkeras/Spkeras_Framework.png" alt="Spkeras_Framework" width="100%" /></p>
+
+<p>SpKeras can easily get and evaluate rate-based spiking neural networks (SNNs), by following steps:</p>
+<ul>
+  <li>Pre-train Convolutional neural networks (CNNs) using Tensorflow-keras</li>
+  <li>Convert CNNs into SNNs using SpKeras</li>
+  <li>Evaluate SNNs and get parameters, e.g. weights, bias and thresholds</li>
+</ul>
+
+<h3 id="built-with">Built With</h3>
+<p>SpKeras has extension layers, e.g. CurrentBias and SpikeForward, following Tensorflow-keras design syntax.</p>
+<ul>
+  <li><a href="https://www.tensorflow.org/guide/keras/sequential_model">Tensorflow-keras</a></li>
+</ul>
+
+<h2 id="new-features">New Features</h2>
+<ul>
+  <li>Works with Keras Functional API, for example:
+    <ul>
+      <li>convert Add Layer</li>
+    </ul>
+  </li>
+</ul>
+
+<!-- GETTING STARTED -->
+<h2 id="getting-started">Getting Started</h2>
+<p>The package is tested in Python 3.7.6 and Tensorflow 2.3.1.</p>
+
+<h3 id="prerequisites">Prerequisites</h3>
+
+<ol>
+  <li>Install tensorflow
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pip <span class="nb">install </span>tensorflow
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="installation">Installation</h3>
+
+<ol>
+  <li>Clone the repo
+    <div class="language-sh highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/<span class="o">(</span>Anonymous<span class="o">)</span>/spkeras.git
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<h3 id="coding-for-spkeras">Coding for SpKeras</h3>
+<p>SpKeras will detect the Activation Layer in CNN to create SpikeActivation Layer. It means all activation function should stay inside Activation Layer, including Softmax and Sigmoid.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#Sequential model
+</span><span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s">'same'</span><span class="p">)</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">BatchNormalization</span><span class="p">())</span>
+<span class="n">model</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">Activation</span><span class="p">(</span><span class="s">'relu'</span><span class="p">))</span>
+
+<span class="c1">#Functional API
+</span><span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span> <span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s">"same"</span><span class="p">)(</span><span class="n">inputs</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s">"relu"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Conv2D</span><span class="p">(</span> <span class="mi">64</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">padding</span><span class="o">=</span><span class="s">"same"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">BatchNormalization</span><span class="p">()(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">Activation</span><span class="p">(</span><span class="s">"relu"</span><span class="p">)(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">add</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">inputs</span><span class="p">])</span>
+</code></pre></div></div>
+
+<h3 id="example">Example</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#load dataset and cnn model
+</span><span class="kn">from</span> <span class="nn">tensorflow.keras.datasets</span> <span class="kn">import</span> <span class="n">cifar10</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">load_model</span>
+
+<span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">cifar10</span><span class="p">.</span><span class="n">load_data</span><span class="p">()</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="o">/</span><span class="mi">255</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="o">/</span><span class="mi">255</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">x_train</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float32'</span><span class="p">)</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">x_test</span><span class="p">.</span><span class="n">astype</span><span class="p">(</span><span class="s">'float32'</span><span class="p">)</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_train</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">keras</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+
+<span class="n">cnn_model</span> <span class="o">=</span> <span class="n">load_model</span><span class="p">(</span><span class="s">'cnn_model.h5'</span><span class="p">)</span>
+
+<span class="c1">#Convert CNN into SNN
+</span><span class="kn">from</span> <span class="nn">spkeras.models</span> <span class="kn">import</span> <span class="n">cnn_to_snn</span>
+
+<span class="c1">#Current normalisation using cnn_to_snn
+##Default: signed_bit=0, amp_factor=100, method=1, epsilon = 0.001
+</span>
+<span class="n">snn_model</span> <span class="o">=</span> <span class="n">cnn_to_snn</span><span class="p">(</span><span class="n">signed_bit</span><span class="o">=</span><span class="mi">0</span><span class="p">)(</span><span class="n">cnn_model</span><span class="p">,</span><span class="n">x_train</span><span class="p">)</span>
+
+<span class="c1">#Evaluate SNN accuracy
+##Default: timesteps=256, thresholding=0.5, scaling_factor=1, noneloss=False, spike_ext=0 
+</span><span class="n">_</span><span class="p">,</span><span class="n">acc</span> <span class="o">=</span> <span class="n">snn_model</span><span class="p">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span><span class="n">y_test</span><span class="p">,</span><span class="n">timesteps</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+
+<span class="c1">#Count SNN spikes
+##Default: timesteps=256, thresholding=0.5, scaling_factor=1, noneloss=False, spike_ext=0, mode=0
+</span><span class="n">s_max</span><span class="p">,</span><span class="n">s</span> <span class="o">=</span> <span class="n">snn_model</span><span class="p">.</span><span class="n">SpikeCounter</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span><span class="n">timesteps</span><span class="o">=</span><span class="mi">256</span><span class="p">)</span>
+
+<span class="c1">#Count neuron numbers
+##Default: mode = 0
+</span><span class="n">n</span> <span class="o">=</span> <span class="n">snn_model</span><span class="p">.</span><span class="n">NeuronNumbers</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="attributes">Attributes</h4>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">'''
+--------------------------
+cnn_to_snn
+--------------------------
+sigbed_bit: bitwidth of weights, default 0 (32-bit) 
+amp_factor: amplification factor, default 100
+method    : default 1
+epsilon   : 0.001
+--------------------------
+evaluate &amp; SpikeCounter
+--------------------------
+timesteps   : inference time, default 256.
+thresholding: default 0.5.
+noneloss    : noneloss mode, default False.
+spike_ext   : extra inference time, default 0. (-1 for unlimited inference time) 
+--------------------------
+SpikeCounter
+--------------------------
+mode: set 1 to count number of neurons under different spikes, default 0
+--------------------------
+NeuronNumber
+--------------------------
+mode: set 1 to exclude average pooling layer, default 0
+'''</span>
+</code></pre></div></div>
+
+<!-- PUBLICATION -->
+<h2 id="more-details">More details</h2>
+<p>For more details please follow <a href="https://github.com/Dengyu-Wu/spkeras">github</a>, <a href="https://www.frontiersin.org/articles/10.3389/fnins.2022.759900">paper</a></p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+
+
+      </footer>
+
+      
+
+      
+
+
+    </div>
+
+    
+  </article>
+
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+<!-- end custom footer snippets -->
+
+        
+
+<div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+    
+    
+      <li><a href="http://github.com/Dengyu-Wu"><i class="fab fa-github" aria-hidden="true"></i> GitHub</a></li>
+    
+    
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2023 Dengyu Wu. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://github.com/academicpages/academicpages.github.io">AcademicPages</a>, a fork of <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    <script src="https://intranet.csc.liv.ac.uk/~dengyu/assets/js/main.min.js"></script>
+
+
+
+
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', '', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+
+
+
+
+  </body>
+</html>
+
